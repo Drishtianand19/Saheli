@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:gsochome/screens/aboutus.dart';
 import 'package:gsochome/screens/add_contacts.dart';
-
+import 'package:gsochome/widgets/live_safe.dart';
 import '../widgets/customcontainer.dart';
 
 class MyHomePage extends StatelessWidget {
@@ -10,6 +10,7 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
 
     const number = '+917678471051';
+    const Ambulance = '+917678471051';
 
     return Scaffold(
       appBar: AppBar(
@@ -21,10 +22,40 @@ class MyHomePage extends StatelessWidget {
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
-              child: Text('MENU'),
-              decoration: BoxDecoration(
-                color: Color(0xFF3F979B),
+               
+               margin: const EdgeInsets.fromLTRB(50, 50, 50, 20),
+             
+              child: Ink(
+                    decoration: const ShapeDecoration(
+                    color: Color.fromARGB(255, 255, 255, 255),
+                    shape: CircleBorder(),
+                  ),
+                  child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                          'assets/profile_2.PNG',
+                          width: 150,
+                          height: 89,
+                    ),
+                 
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const Text(
+                    "XYZ",
+                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                ],
               ),
+                 
+                ),
+
+
             ),
             ListTile(
               title: Text('Trusted Contacts'),
@@ -37,20 +68,93 @@ class MyHomePage extends StatelessWidget {
                     ));
               },
             ),
-            ListTile(
-              title: Text('Option 2'),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => About_Us(),
-                    ));
-
-              },
-            ),
-          ],
-        ),
+           
+            Card(
+              margin: const EdgeInsets.fromLTRB(50, 5, 50, 10),
+          color: Color(0xFF3F979B),
+          child: SizedBox(
+          width: 50,
+          height: 60,
+          child: ListTile(
+            title: Text('Ambulance',
+    //textAlign: TextAlign.center,
+    style: TextStyle(
+      fontSize: 20,
+    color: Color.fromARGB(255, 254, 255, 255),
+  ),
       ),
+            trailing:IconButton(
+                    iconSize: 25,
+                    icon: const Icon(Icons.phone),
+                    color: Colors.white,
+                    onPressed:()  async {
+                      await FlutterPhoneDirectCaller.callNumber(Ambulance);
+                    },
+                  ),
+          ),
+        ),
+            ),
+
+
+            Card(
+              margin: const EdgeInsets.fromLTRB(50, 10, 50, 10),
+          color: Color(0xFF3F979B),
+          child: SizedBox(
+          width: 50,
+          height: 60,
+          child: ListTile(
+            title: Text('   Police',
+    textAlign: TextAlign.center,
+    style: TextStyle(
+      fontSize: 20,
+    color: Color.fromARGB(255, 254, 255, 255),
+  ),
+      ),
+            trailing: IconButton(
+                    iconSize: 25,
+                    icon: const Icon(Icons.phone),
+                    color: Colors.white,
+                    onPressed:()  async {
+                      await FlutterPhoneDirectCaller.callNumber(Ambulance);
+                    },
+                  ),
+          ),
+        ),
+            ),
+
+
+            Card(
+              margin: const EdgeInsets.fromLTRB(50, 220, 50, 10),
+          color: Color(293462),
+          child: TextButton(
+  style: ButtonStyle(
+    foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
+  ),
+  onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => About_Us()));
+                      },
+  child: Text('About this App',
+  textAlign: TextAlign.center,
+    style: TextStyle(
+      fontSize: 20,
+    color: Color.fromARGB(255, 255, 255, 255),
+  ),),
+)
+            ),
+
+            
+
+
+       
+        ],
+        ),
+       
+      ),
+
+
       body: SafeArea(
           child: Column(
         children: [
@@ -128,13 +232,36 @@ class MyHomePage extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             child: Row(
               children: <Widget>[
+                /*Expanded(child: Text(
+                    'Launched on 22nd January 2015 by the Prime Minister of India in Haryana, the Beti Bachao Beti Padhao Scheme ensures survival, protection and education of girl children. The scheme aims to address issues of the declining sex ratio over the past few years, create social awareness and enhance the efficiency of welfare services developed for girls.',
+                  maxLines:3,
+                  overflow: TextOverflow.ellipsis,
+
+                )),*/
                 CustomContainer(
                   color: Color(0xFF8BF5FA),
-                  schemename: '2017 Scheme',
-                  info: '',
+                  /*decoration: BoxDecoration(
+                    color: Color(0xFF8BF5FA),
+                    image: DecorationImage(
+                      image: AssetImage(
+                          'assets/BetiPadhao.jpg'),
+                      fit: BoxFit.fill,
+                    ),*/
+                  schemename: 'Beti Bachao Beti Padhao Scheme',
+                  info: 'Launched on 22nd January 2015 by the Prime Minister of India in Haryana, the Beti Bachao Beti Padhao Scheme ensures survival, protection and education of girl children. The scheme aims to address issues of the declining sex ratio over the past few years, create social awareness and enhance the efficiency of welfare services developed for girls.',
+
+
+
                 ),
+
                 CustomContainer(
                   color: Color(0xFF3F979B),
+                  /*image: new DecorationImage(
+                    fit: BoxFit.cover,
+                    colorFilter: new ColorFilter.mode(Colors.black.withOpacity(0.2), BlendMode.dstATop),
+                    image: new NetworkImage(
+                      'assets/BetiPadhao.jpg',
+                    )*/
                   schemename: '2018 scheme',
                   info: '',
                 ),
@@ -156,6 +283,16 @@ class MyHomePage extends StatelessWidget {
               ],
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              "Locations",
+                style: TextStyle(
+                    fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+
+          ),
+          LiveSafe(),
         ],
       )),
     );
